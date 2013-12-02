@@ -7,6 +7,10 @@ MyTunes.Views.LibraryView = Backbone.View.extend({
   tagName: "table",
 
   initialize: function() {
+    this.collection.on('play', function(){
+      this.render();
+    }, this);
+
     this.render();
   },
 
