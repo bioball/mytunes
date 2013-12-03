@@ -8,13 +8,6 @@ MyTunes.Models.AppModel = Backbone.Model.extend({
     this.set('currentSong', new MyTunes.Models.SongModel());
     this.set('songQueue', new MyTunes.Collections.SongQueue());
 
-    /* Note that 'this' is passed as the third argument. That third argument is
-    the context. The 'play' handler will always be bound to that context we pass in.
-    In this example, we're binding it to the App. This is helpful because otherwise
-    the 'this' we use that's actually in the funciton (this.set('currentSong', song)) would
-    end up refering to the window. That's just what happens with all JS events. The handlers end up
-    getting called from the window (unless we override it, as we do here). */
-
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);
@@ -22,7 +15,20 @@ MyTunes.Models.AppModel = Backbone.Model.extend({
     params.library.on('enqueue', function(song){
       // debugger;
       this.get('songQueue').add(song);
+      var songStorage = localStorage['playlist'] ? JSON.parse(localStorage['playlist']) : {};
+      songStorage[song.cid] = true;
+      localStorage['playlist'] = JSON.stringify(songStorage);
     }, this);
-  }
+  },
 
+  loadFromLocalStorage: function(){
+    if(localStorage['playlist']){
+      var songs = JSON.parse(localStorage['playlist']);
+      var self = this;
+      _(songs).each(function(bool, songID){
+        var song = self.get('library').get(songID);
+        self.get('songQueue').add(song);
+      });
+    }
+  }
 });

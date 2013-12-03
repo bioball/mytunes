@@ -28,8 +28,10 @@
 
         var app = new MyTunes.Models.AppModel({library: library});
 
-        // build a view for the top level of the whole app
         var appView = new MyTunes.Views.AppView({model: app});
+        // build a view for the top level of the whole app
+
+        app.loadFromLocalStorage();
 
         // put the view onto the screen
         $('body').append(appView.render());

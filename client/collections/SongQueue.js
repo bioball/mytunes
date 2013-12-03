@@ -11,20 +11,29 @@ MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
       }
     }, this);
 
-    this.on('ended dequeue', function(){
-      this.shift();
+    // this.on('ended', function(){
+    //   this.shift();
+    //   if(this.at(0)){
+    //     this.playFirst();
+    //   }
+    // }, this);
+    this.on('dequeue', function(){
+      this.updateStorage();
       if(this.at(0)){
         this.playFirst();
       }
     }, this);
-    // this.on('dequeue', function(){
-    //   this.shift();
-    // }, this);
   },
 
   playFirst: function(){
-    // debugger;
     this.at(0).play();
+  },
+
+  updateStorage: function(){
+    var songStorage = JSON.parse(localStorage['playlist']);
+    var removeSong = this.shift();
+    delete songStorage[removeSong.cid];
+    localStorage['playlist'] = JSON.stringify(songStorage);
   }
 
 });
