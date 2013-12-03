@@ -7,7 +7,6 @@ MyTunes.Models.AppModel = Backbone.Model.extend({
   initialize: function(params){
     this.set('currentSong', new MyTunes.Models.SongModel());
     this.set('songQueue', new MyTunes.Collections.SongQueue());
-
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);

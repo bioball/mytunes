@@ -22,8 +22,6 @@ MyTunes.Views.SongQueueView = Backbone.View.extend({
       $queueBody = $(this.$el.find('ol'));
     }
 
-    // var $queueBody = $(this.$el.find('ul')).html('') || $(this.$el.html('<ul></ul>'));
-    // debugger;
     this.collection.each(function(song){
       var queueEntryView = new MyTunes.Views.SongQueueEntryView({model: song});
       queueEntryView.render();
@@ -32,7 +30,7 @@ MyTunes.Views.SongQueueView = Backbone.View.extend({
   },
 
   remove: function(song){
-    console.log(this);
+    console.log("stuff");
     this.collection.takeOut(song);
   }
 

@@ -5,10 +5,10 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 MyTunes.Views.SongQueueEntryView = Backbone.View.extend({
   tagName: 'li',
 
-  template: _.template('<%= artist %> - <%= title %><button class="remove">X</button>'),
+  template: _.template('<button class="removeButton">X</button><%= artist %> - <%= title %>'),
 
   events: {
-    'click .remove': 'remove'
+    'click .removeButton': 'remove'
   },
 
   render: function(){
@@ -19,9 +19,13 @@ MyTunes.Views.SongQueueEntryView = Backbone.View.extend({
   },
 
   remove: function(){
-    var temp = this.model.collection;
-    this.model.collection.remove(this.model);
-    temp.render();
+
+    // var col = this.model.collection;
+    // console.log("before", col.toJSON());
+    // this.model.collection.remove(this.model);
+    this.model.trigger('triggle', this.model);
+    // console.log("after", col.toJSON());
+
   }
 
 

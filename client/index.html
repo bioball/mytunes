@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
   <body>
+    <ol class="playlistSongs">
+    </ol>
+
+    <script type="text/template" id="queueTemplate">
+        <h3>Playlist</h3>
+        <% _(songs).each(function(song){ %>
+            <li><button class="removeButton">X</button><%= song.artist %> - <%= song.title %></li>
+        <% }) %>
+    </script>
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
     <script src="bower_components/jquery/jquery.min.js"></script>

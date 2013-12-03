@@ -2,7 +2,9 @@
 window.MyTunes = window.MyTunes || {};
 window.MyTunes.Collections = window.MyTunes.Collections || {};
 
-MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
+MyTunes.Collections.SongQueue = Backbone.Collection.extend({
+
+  model: MyTunes.Models.SongModel,
 
   initialize: function(){
     this.on('add', function(){
@@ -11,17 +13,15 @@ MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
       }
     }, this);
 
-    // this.on('ended', function(){
-    //   this.shift();
-    //   if(this.at(0)){
-    //     this.playFirst();
-    //   }
-    // }, this);
     this.on('dequeue', function(){
       this.updateStorage(this.shift());
       if(this.at(0)){
         this.playFirst();
       }
+    }, this);
+
+    this.on('triggle', function(song){
+      this.takeOut(song);
     }, this);
   },
 
@@ -30,6 +30,7 @@ MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
   },
 
   takeOut: function(song){
+    // debugger;
     this.remove(song);
     this.updateStorage(song);
   },
