@@ -15,11 +15,11 @@ MyTunes.Views.SongQueueView = Backbone.View.extend({
   render: function() {
     // return this.$el;
     var $queueBody;
-    if(this.$el.find('ul')[0]) {
-      $queueBody = $(this.$el.find('ul')).html('');
+    if(this.$el.find('ol')[0]) {
+      $queueBody = $(this.$el.find('ol')).html('');
     } else {
-      this.$el.append('<ul></ul>');
-      $queueBody = $(this.$el.find('ul'));
+      this.$el.append('<ol></ol>');
+      $queueBody = $(this.$el.find('ol'));
     }
 
     // var $queueBody = $(this.$el.find('ul')).html('') || $(this.$el.html('<ul></ul>'));
@@ -29,6 +29,11 @@ MyTunes.Views.SongQueueView = Backbone.View.extend({
       queueEntryView.render();
       $queueBody.append(queueEntryView.el);
     }, this);
+  },
+
+  remove: function(song){
+    console.log(this);
+    this.collection.takeOut(song);
   }
 
 });

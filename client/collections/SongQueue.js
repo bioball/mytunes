@@ -18,7 +18,7 @@ MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
     //   }
     // }, this);
     this.on('dequeue', function(){
-      this.updateStorage();
+      this.updateStorage(this.shift());
       if(this.at(0)){
         this.playFirst();
       }
@@ -29,9 +29,14 @@ MyTunes.Collections.SongQueue = MyTunes.Collections.Songs.extend({
     this.at(0).play();
   },
 
-  updateStorage: function(){
+  takeOut: function(song){
+    this.remove(song);
+    this.updateStorage(song);
+  },
+
+  updateStorage: function(song){
     var songStorage = JSON.parse(localStorage['playlist']);
-    var removeSong = this.shift();
+    var removeSong = song;
     delete songStorage[removeSong.cid];
     localStorage['playlist'] = JSON.stringify(songStorage);
   }
