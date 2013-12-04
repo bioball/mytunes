@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="bower_components/normalize-css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="assets/main.css" />
   </head>
@@ -13,22 +14,34 @@
         <audio class="audio" controls autoplay /></audio>
         <div class="nowplaying">
           <h3>Now Playing</h3>
-          <table class="table table-hover table-condensed">
+          <table class="table table-hover table-condensed currentPlaylist">
             <thead>
               <tr>
                 <th>Artist</th>
                 <th>Title</th>
+                <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="nowplayingtbody">
             </tbody>
           </table>
         </div>
       </div>
       <div class="songside">
-        <table class="library">
+        <h3>Library</h3>
+        <table class="table table-hover table-condensed library">
+          <thead>
+            <th>Artist</th>
+            <th>Title</th>
+            <th>Play #</th>
+            <tbody id="librarytbody">
+            </tbody>
+          </thead>
         </table>
-        <div class="playlists">
+        <div>
+          <h3>Playlists</h3>
+          <ul id="playlists">
+          </ul>
         </div>
       </div>
     </div>

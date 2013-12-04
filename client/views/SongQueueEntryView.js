@@ -5,10 +5,10 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 MyTunes.Views.SongQueueEntryView = Backbone.View.extend({
   tagName: 'tr',
 
-  template: _.template('<td><%= artist %></td><td><%= title %></td>'),
+  template: _.template('<td><%= artist %></td><td><%= title %></td><td><span class="glyphicon glyphicon-remove-circle"></span></td>'),
 
   events: {
-    'click .removeButton': 'remove'
+    'click .glyphicon': 'remove'
   },
 
   render: function(){

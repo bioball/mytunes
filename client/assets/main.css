@@ -4,15 +4,17 @@ html {
 
 body {
   height: 100%;
+  background-image: url('background.jpg');
 }
 
 
 .player {
   position: relative;
   height: 100%;
-  width: 900px;
+  width: 896px;
   margin: 0 auto;
-  background-color: #EEE;
+  background-color:rgba(255,255,255,0.6);
+
 }
 .playside {
   position: absolute;
@@ -24,9 +26,17 @@ body {
 .songside {
   position: absolute;
   right: 0px;
+  bottom: 0px;
   top: 0px;
   width: 33%;
-  padding-left: 10px;
+  background-color:rgba(180,180,180,0.25);
+}
+
+.songside h3 {
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
+  font-size: 3em;
+  padding: 10px;
 }
 
 .aaliyah {
@@ -35,7 +45,16 @@ body {
   background-color: #ccc;
 }
 
+.currentPlaylist{
+  position: relative;
+  bottom: 20px;
+  left: 10px;
+  width: 590px;
+}
+
 audio {
+  position: relative;
+  top: -3px;
   width: 600px;
   border-radius: 0px;
 }
@@ -52,4 +71,65 @@ audio {
 .nowplaying li {
   list-style: none;
   font-size: 1.2em;
+}
+
+#playlists li {
+  list-style: none;
+  padding: 10px 20px 10px 20px;
+  font-size: 1.3em;
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+
+#playlists li:hover{
+  background-color:rgba(255,255,255,0.5);
+}
+
+#playlists li a {
+  color: black;
+}
+
+#playlists li a:hover {
+  text-decoration: none;
+}
+
+#playlists {
+  position: absolute;
+  left: -40px;
+  width: 336px;
+}
+
+.library {
+  font-size: .9em;
+}
+
+input {
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #eee;
+  padding-left: 10px;
+  height: 23px;
+  width: 89%;
+  margin-bottom: 10px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -moz-transition: none;
+  -webkit-transition: none;
+}
+
+.input:focus {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -moz-transition: none;
+  -webkit-transition: none;
+}
+
+.submit {
+  border: 0px;
+  height: 23px;
+  border-radius: 0 5px 5px 0;
+  background-color: #991F3B;
+  color: white;
 }

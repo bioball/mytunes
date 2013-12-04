@@ -3,7 +3,7 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 
 MyTunes.Views.PlaylistsView = Backbone.View.extend({
 
-  el: 'div .playlists',
+  el: '#playlists',
 
   initialize: function(){
     this.render();

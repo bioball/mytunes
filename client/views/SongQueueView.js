@@ -4,7 +4,7 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 
 MyTunes.Views.SongQueueView = Backbone.View.extend({
 
-  el: 'tbody',
+  el: '#nowplayingtbody',
 
   initialize: function() {
 
