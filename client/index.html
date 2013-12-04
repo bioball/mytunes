@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+  </head>
   <body>
     <ol class="playlistSongs">
     </ol>
 
-    <script type="text/template" id="queueTemplate">
-        <h3>Playlist</h3>
-        <% _(songs).each(function(song){ %>
-            <li><button class="removeButton">X</button><%= song.artist %> - <%= song.title %></li>
-        <% }) %>
-    </script>
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script src="data/data.js"></script>
 
     <script src="models/SongModel.js"></script>
     <script src="collections/Songs.js"></script>
     <script src="collections/SongQueue.js"></script>
+    <script src="collections/Playlists.js"></script>
     <script src="models/AppModel.js"></script>
 
     <script src="views/PlayerView.js"></script>
@@ -29,13 +28,19 @@
     <script src="views/AppView.js"></script>
     <script src="views/SongQueueEntryView.js"></script>
     <script src="views/SongQueueView.js"></script>
+    <script src="views/PlaylistsView.js"></script>
+    <script src="views/PlaylistEntryView.js"></script>
 
     <script>
       $(function(){
+
+        window.vents = _.extend({}, Backbone.Events);
         // set up model objects
         var library = new MyTunes.Collections.Songs(songData);
 
-        var app = new MyTunes.Models.AppModel({library: library});
+        var playlists = new MyTunes.Collections.Playlists(JSON.parse(localStorage.playlist));
+
+        var app = new MyTunes.Models.AppModel({library: library, playlists: playlists});
 
         var appView = new MyTunes.Views.AppView({model: app});
         // build a view for the top level of the whole app

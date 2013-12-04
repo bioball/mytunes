@@ -5,10 +5,12 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 MyTunes.Views.SongQueueView = Backbone.View.extend({
 
   initialize: function() {
+
     this.collection.on('add remove', function(){
       this.render();
     }, this);
-    this.$el.html('<h3>Playlist</h3>');
+
+    this.$el.html('<h3>Now Playing "' + localStorage['currentPlaylist'] + '"</h3>');
     this.render();
   },
 
@@ -30,7 +32,6 @@ MyTunes.Views.SongQueueView = Backbone.View.extend({
   },
 
   remove: function(song){
-    console.log("stuff");
     this.collection.takeOut(song);
   }
 

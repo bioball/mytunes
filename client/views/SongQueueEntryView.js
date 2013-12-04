@@ -20,11 +20,7 @@ MyTunes.Views.SongQueueEntryView = Backbone.View.extend({
 
   remove: function(){
 
-    // var col = this.model.collection;
-    // console.log("before", col.toJSON());
-    // this.model.collection.remove(this.model);
     this.model.trigger('triggle', this.model);
-    // console.log("after", col.toJSON());
 
   }
 

@@ -7,22 +7,30 @@ MyTunes.Models.AppModel = Backbone.Model.extend({
   initialize: function(params){
     this.set('currentSong', new MyTunes.Models.SongModel());
     this.set('songQueue', new MyTunes.Collections.SongQueue());
+
+    vents.on('reload', this.loadFromLocalStorage, this);
+
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);
 
     params.library.on('enqueue', function(song){
-      // debugger;
       this.get('songQueue').add(song);
-      var songStorage = localStorage['playlist'] ? JSON.parse(localStorage['playlist']) : {};
-      songStorage[song.cid] = true;
-      localStorage['playlist'] = JSON.stringify(songStorage);
+
+      this.get('songQueue').storeIntoLocalStorage(song);
     }, this);
   },
 
   loadFromLocalStorage: function(){
-    if(localStorage['playlist']){
-      var songs = JSON.parse(localStorage['playlist']);
+    if(localStorage['currentPlaylist']){
+      var name = localStorage['currentPlaylist'];
+      var playlists = JSON.parse(localStorage['playlist']);
+      var songs;
+      _(playlists).each(function(playlist){
+        if(name === playlist.name){
+          songs = playlist.list;
+        }
+      });
       var self = this;
       _(songs).each(function(bool, songID){
         var song = self.get('library').get(songID);
@@ -30,4 +38,6 @@ MyTunes.Models.AppModel = Backbone.Model.extend({
       });
     }
   }
+
+
 });

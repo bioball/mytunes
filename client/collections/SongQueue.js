@@ -23,6 +23,11 @@ MyTunes.Collections.SongQueue = Backbone.Collection.extend({
     this.on('triggle', function(song){
       this.takeOut(song);
     }, this);
+
+    vents.on('changePlaylist', function(){
+      this.reset();
+      vents.trigger('reload', this);
+    }, this);
   },
 
   playFirst: function(){
@@ -32,14 +37,52 @@ MyTunes.Collections.SongQueue = Backbone.Collection.extend({
   takeOut: function(song){
     // debugger;
     this.remove(song);
-    this.updateStorage(song);
+    this.removeFromLocalStorage(song);
   },
 
-  updateStorage: function(song){
-    var songStorage = JSON.parse(localStorage['playlist']);
-    var removeSong = song;
-    delete songStorage[removeSong.cid];
-    localStorage['playlist'] = JSON.stringify(songStorage);
+  removeFromLocalStorage: function(song){
+    var playlists = JSON.parse(localStorage['playlist']);
+    var songs;
+    var currentPlaylist = localStorage.currentPlaylist;
+    _(playlists).each(function(playlist){
+      if(currentPlaylist === playlist.name){
+        delete playlist.list[song.cid];
+      }
+    });
+    localStorage['playlist'] = JSON.stringify(playlists);
+  },
+
+  storeIntoLocalStorage: function(song){
+    if(localStorage.currentPlaylist){
+      var playlists;
+      if(localStorage.playlist){
+        playlists = JSON.parse(localStorage.playlist);
+        var nameExists = false;
+        _(playlists).each(function(playlist){
+          if(playlist.name === localStorage.currentPlaylist){
+            nameExists = true;
+            playlist.list[song.cid] = true;
+          }
+        });
+        if(!nameExists){
+          playlists.push(this.createPlaylist(song));
+        }
+      } else {
+        playlists = [];
+        playlists.push(this.createPlaylist(song));
+      }
+      localStorage.playlist = JSON.stringify(playlists);
+    }
+  },
+
+  createPlaylist: function(song){
+    var playlist = {
+      name: localStorage.currentPlaylist,
+      list: {}
+    };
+    playlist.list[song.cid] = true;
+    return playlist;
   }
+
 
 });

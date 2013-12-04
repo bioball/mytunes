@@ -24,3 +24,26 @@ describe('LibraryEntryView', function() {
     expect(model.enqueue).toHaveBeenCalled();
   });
 });
+
+// localStorage['playlist'].each(function(plist){
+//   <%= plist.name %>
+//   for(var song in plist.list){
+//     <li><%= song %></li>
+//   }
+// })
+// [
+//   {
+//     name: "workout",
+//     list: {
+//       c1: true,
+//       c3: true
+//     }
+//   },
+//   {
+//     name: "sleeping",
+//     list: {
+//       c4: true,
+//       c10: true
+//     }
+//   }
+// ]
