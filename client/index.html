@@ -2,13 +2,36 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="assets/main.css" />
   </head>
   <body>
-    <ol class="playlistSongs">
-    </ol>
-
-    <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
-     below them until after the scripts load-->
+    <div class="player">
+      <div class="playside">
+        <div class="aaliyah">
+          <img src="assets/aaliyah.jpg" />
+        </div>
+        <audio class="audio" controls autoplay /></audio>
+        <div class="nowplaying">
+          <h3>Now Playing</h3>
+          <table class="table table-hover table-condensed">
+            <thead>
+              <tr>
+                <th>Artist</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="songside">
+        <table class="library">
+        </table>
+        <div class="playlists">
+        </div>
+      </div>
+    </div>
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
@@ -34,6 +57,8 @@
     <script>
       $(function(){
 
+        localStorage.playlist = localStorage.playlist || "[]";
+
         window.vents = _.extend({}, Backbone.Events);
         // set up model objects
         var library = new MyTunes.Collections.Songs(songData);
@@ -47,8 +72,10 @@
 
         app.loadFromLocalStorage();
 
+        // appView.render()
+
         // put the view onto the screen
-        $('body').append(appView.render());
+        // $('body').append(appView.render());
       });
     </script>
   </body>

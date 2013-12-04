@@ -3,9 +3,9 @@ window.MyTunes = window.MyTunes || {};
 window.MyTunes.Views = window.MyTunes.Views || {};
 
 MyTunes.Views.SongQueueEntryView = Backbone.View.extend({
-  tagName: 'li',
+  tagName: 'tr',
 
-  template: _.template('<button class="removeButton">X</button><%= artist %> - <%= title %>'),
+  template: _.template('<td><%= artist %></td><td><%= title %></td>'),
 
   events: {
     'click .removeButton': 'remove'

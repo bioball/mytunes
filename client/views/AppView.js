@@ -4,6 +4,8 @@ window.MyTunes.Views = window.MyTunes.Views || {};
 
 MyTunes.Views.AppView = Backbone.View.extend({
 
+  // tagName: 'div class="player"',
+
 
   initialize: function(params){
     this.playerView = new MyTunes.Views.PlayerView({model: this.model.get('currentSong')});
@@ -14,15 +16,6 @@ MyTunes.Views.AppView = Backbone.View.extend({
     this.model.on('change:currentSong', function(model){
       this.playerView.setSong(model.get('currentSong'));
     }, this);
-  },
-
-  render: function(){
-    return this.$el.html([
-      this.playerView.$el,
-      this.libraryView.$el,
-      this.songQueueView.$el,
-      this.playlistsView.$el
-    ]);
   }
 
 });

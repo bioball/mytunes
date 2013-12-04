@@ -2,8 +2,13 @@ window.MyTunes = window.MyTunes || {};
 window.MyTunes.Views = window.MyTunes.Views || {};
 
 MyTunes.Views.PlaylistsView = Backbone.View.extend({
+
+  el: 'div .playlists',
+
   initialize: function(){
     this.render();
+
+    vents.on('trigglePlumBum', this.render, this);
   },
 
   events: {
@@ -22,7 +27,9 @@ MyTunes.Views.PlaylistsView = Backbone.View.extend({
     });
   },
 
-  createPlaylist: function(){
-    vents.trigger('createPlaylist', this);
+  createPlaylist: function(event){
+    event.preventDefault();
+    vents.trigger('trigglePlot', this.$el.find('input').val());
+    this.$el.find('input').val('');
   }
 });

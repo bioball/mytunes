@@ -1,0 +1,55 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+
+.player {
+  position: relative;
+  height: 100%;
+  width: 900px;
+  margin: 0 auto;
+  background-color: #EEE;
+}
+.playside {
+  position: absolute;
+  width: 66%;
+  top: 0;
+  bottom: 0;
+}
+
+.songside {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 33%;
+  padding-left: 10px;
+}
+
+.aaliyah {
+  height: 450px;
+  width: 600px;
+  background-color: #ccc;
+}
+
+audio {
+  width: 600px;
+  border-radius: 0px;
+}
+
+.nowplaying h3 {
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
+  font-size: 4em;
+  padding-left: 15px;
+  position: relative;
+  bottom: 15px;
+}
+
+.nowplaying li {
+  list-style: none;
+  font-size: 1.2em;
+}
